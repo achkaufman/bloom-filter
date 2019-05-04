@@ -1,5 +1,6 @@
 import sys
 import os
+import datetime
 import hashlib
 
 if len(sys.argv) > 1:
@@ -23,8 +24,11 @@ startCount = len(filenameList)
 # Create list to track hashes of files in current directory
 md5list = []
 
-# Create list to track filenames of deleted items
-deletedItems = []
+# Create list and output file to track filenames of deleted items
+deletedItemsList = []
+currentDateTime = datetime.datetime.now()
+outfileName = (currentDateTime.strftime("%Y-%m-%d_%H-%M-%S") + "-bloom-filter.txt")
+deletedItemsFile = open(outfileName, 'w+')
 
 # For each file, check to see if its hash is in the hash list
 # If it is, delete the file (duplicate)
@@ -40,7 +44,8 @@ for filename in reversed(filenameList):
         h.update(fileBinary)
     # If the file's hash already exists in the hash list, delete the file
     if h.hexdigest() in md5list:
-        deletedItems.append(filename)
+        deletedItemsList.append(filename)
+        deletedItemsFile.write(filename + "\n")
         os.remove(filename)
     # Otherwise, add the file's hash to the list
     else:
@@ -49,12 +54,12 @@ print("Done.")
 print()
 
 # Get the number of deleted items
-deletedCount = len(deletedItems)
+deletedCount = len(deletedItemsList)
 
 # Debugging - Output list of files that were deleted during operation
 # print(str(deletedCount) + " items deleted:")
-# for x in range (len(deletedItems)):
-#     print(deletedItems[x])
+# for x in range (len(deletedItemsList)):
+#     print(deletedItemsList[x])
 # print()
 
 # Get list of all filenames in current directory
@@ -71,3 +76,6 @@ endCount = len(newFilenameList)
 print("\t" + str(startCount) + "\tItems originally in directory")
 print("\t" + str(deletedCount) + "\tDuplicate items deleted from directory")
 print("\t" + str(endCount) + "\tItems remaining in directory")
+
+# Close output file
+deletedItemsFile.close()

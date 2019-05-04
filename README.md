@@ -32,3 +32,9 @@ Note: This script traverses the directory in reverse order in an attempt to pres
 with base filenames, rather than copies with appended numbers or annotations (duplicate files 
 ending in "(1)" or "- Copy", for example, usually appear before their original counterparts in 
 a directory listing).
+
+## Output
+
+The script outputs a text file in the same directory where the delete operation takes place, 
+containing a list of all items that were deleted.  The text file is timestamped with the 
+date and time the script was ran.
