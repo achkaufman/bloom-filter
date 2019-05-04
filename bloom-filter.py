@@ -69,5 +69,5 @@ endCount = len(newFilenameList)
 
 # Summary
 print("\t" + str(startCount) + "\tItems originally in directory")
-print("\t" + str(deletedCount) + "\tItems deleted from directory")
+print("\t" + str(deletedCount) + "\tDuplicate items deleted from directory")
 print("\t" + str(endCount) + "\tItems remaining in directory")
