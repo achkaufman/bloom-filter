@@ -37,4 +37,4 @@ a directory listing).
 
 The script outputs a text file in the same directory where the delete operation takes place, 
 containing a list of all items that were deleted.  The text file is timestamped with the 
-date and time the script was ran.
+date and time the script was ran (example: `2019-05-04_13-37-35-bloom-filter.txt`).
